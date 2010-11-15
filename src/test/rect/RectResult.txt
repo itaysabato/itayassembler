@@ -1,0 +1,64 @@
+A: 0
+C:
+dest: D
+comp: M
+jump: null
+A: 23
+C:
+dest: null
+comp: D
+jump: JLE
+A: 16
+C:
+dest: M
+comp: D
+jump: null
+A: 16384
+C:
+dest: D
+comp: A
+jump: null
+A: 17
+C:
+dest: M
+comp: D
+jump: null
+A: 17
+C:
+dest: A
+comp: M
+jump: null
+C:
+dest: M
+comp: -1
+jump: null
+A: 17
+C:
+dest: D
+comp: M
+jump: null
+A: 32
+C:
+dest: D
+comp: D+A
+jump: null
+A: 17
+C:
+dest: M
+comp: D
+jump: null
+A: 16
+C:
+dest: MD
+comp: M-1
+jump: null
+A: 10
+C:
+dest: null
+comp: D
+jump: JGT
+A: 23
+C:
+dest: null
+comp: 0
+jump: JMP
