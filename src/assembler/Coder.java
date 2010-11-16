@@ -1,5 +1,7 @@
 package assembler;
 import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Names: Itay Sabato, Rotem Barzilay <br/>
  * Logins: itays04, rotmus <br/>
@@ -9,17 +11,19 @@ import java.util.HashMap;
  */
 public class Coder {
 
-     private static HashMap<String,String> jumpMap =    new  HashMap<String,String>();
+     private static Map<String,String> jumpMap = buildMap();
 
-    public static  void buildMap() {
-        jumpMap.put("null","000");
+    public static Map<String,String> buildMap() {
+        HashMap<String,String> jumpMap = new  HashMap<String,String>();
+        jumpMap.put("","000");
         jumpMap.put("JGT","001");
-        jumpMap.put("JEO","010");
+        jumpMap.put("JEQ","010");
         jumpMap.put("JGE","011");
         jumpMap.put("JLT","100");
         jumpMap.put("JNE","101");
         jumpMap.put("JLE","110");
         jumpMap.put("JMP","111");
+        return jumpMap;
     }
 
     public static String dest(String dest) {
@@ -67,8 +71,11 @@ public class Coder {
          else
              result[3] = '0';
 
-         if(one || or || (D && !(A || M)) || ((A || M) && plus && one) ||
-                 ((A || M) && minus && D))
+         if(((one || or || (D && !(A || M)) || ((A || M) && plus && one) ||
+                 ((A || M) && minus && D)) && !comp.contains("-1")
+                 && !comp.contains("A-1") && !comp.contains("D-A")
+                  && !comp.contains("M-1") && !comp.contains("M-A"))
+                  || comp.contains("D-1")|| comp.contains("D-1"))
              result[4] = '1';
          else
              result[4] = '0';

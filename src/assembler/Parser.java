@@ -22,8 +22,8 @@ public class Parser {
     public boolean advance() {
         boolean hasNext = false;
         while(source.hasNextLine()) {
-            line = source.nextLine();
-            if(!line.isEmpty() && !line.startsWith("/")){
+            line = source.nextLine().replaceAll("( )|(//(.*))", ""); // get rid of spaces and comments
+            if(!line.isEmpty()){
                 hasNext = true;
                 break;
             }
@@ -44,7 +44,7 @@ public class Parser {
     }
 
     public String dest() {
-        if(!line.contains("=")) return null;
+        if(!line.contains("=")) return "";
         String[] sp =  line.split("=");
         line = sp[1];
         return sp[0];
@@ -57,7 +57,7 @@ public class Parser {
             return sp[0];
         }
         String res = line;
-        line = null;
+        line = "";
         return res;
     }
 
@@ -67,5 +67,14 @@ public class Parser {
 
     public void close() {
         source.close();
+    }
+
+    public String[] CParameters() {
+        String[] result = new String[3];
+        // the order DOES matter!
+        result[1] = dest();
+        result[0] = comp();
+        result[2] = jump();
+        return result;
     }
 }
