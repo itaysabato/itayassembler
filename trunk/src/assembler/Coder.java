@@ -9,8 +9,14 @@ import java.util.Map;
  * Date: 13/11/2010 <br/>
  * Time: 23:14:51 <br/>
  */
+
+/**
+ * This class translate C-instruction to binary.
+ */
 public class Coder {
+    //singleton
     private static final Coder instance = new Coder();
+    //This map contains all the symbols and their binary translation
     private  final Map<String, String> mnemonicsToBinary;
 
     private Coder() {
@@ -23,6 +29,9 @@ public class Coder {
         return instance;
     }
 
+    /**
+     *   Initialize the map with the jump symbols and their translation.
+     */
     private void initJumps() {
         mnemonicsToBinary.put("","000");
         mnemonicsToBinary.put("JGT","001");
@@ -34,6 +43,9 @@ public class Coder {
         mnemonicsToBinary.put("JMP","111");
     }
 
+    /**
+     *     //Initialize the map with the comp symbols and their translation.
+     */
     private void initComps() {
         mnemonicsToBinary.put("0","101010");
         mnemonicsToBinary.put("1","111111");
@@ -55,6 +67,9 @@ public class Coder {
         mnemonicsToBinary.put("D|A","010101");
     }
 
+       /**
+     * returns the binary translation to the dest symbol
+     */
     public String dest(String dest) {
         String  bits = "";
 
@@ -69,7 +84,10 @@ public class Coder {
 
         return bits;
     }
-    
+
+       /**
+     * returns the binary translation to the comp symbol
+     */
      public  String comp(String comp) {
          if(comp.contains("M")) {
                   return  "1"+mnemonicsToBinary.get(comp.replaceAll("M","A"));
@@ -79,6 +97,9 @@ public class Coder {
          }
     }
 
+    /**
+     * returns the binary translation to the jump symbol
+     */
      public String jump(String jump) {
         return mnemonicsToBinary.get(jump);
     }

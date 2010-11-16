@@ -7,6 +7,10 @@ package assembler;
  * Date: 13/11/2010 <br/>
  * Time: 23:34:54 <br/>
  */
+
+/**
+ *  Enum class for the commands.
+ */
 public enum CommandType {
     A,C,L
 }
