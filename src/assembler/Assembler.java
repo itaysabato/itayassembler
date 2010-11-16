@@ -27,7 +27,6 @@ public class Assembler {
             int PC= 0;    // first pass
             while(parser.advance()) {
                 if(parser.commandType() == CommandType.L) {
-                    System.out.println(PC);
                     symbols.put(parser.symbol(), toAddress(PC));
                 }
                 else PC++;
@@ -38,7 +37,7 @@ public class Assembler {
 
             int VC = ADDRESS_START; // second pass
             while(parser.advance()) {
-                String bits = "";
+                String bits;
 
                 if(parser.commandType() == CommandType.C) {
                     String[] cdj = parser.CParameters();
@@ -64,7 +63,7 @@ public class Assembler {
             }
         }
         catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            System.out.println("caught IOException: "+e.getMessage());
         }
     }
 

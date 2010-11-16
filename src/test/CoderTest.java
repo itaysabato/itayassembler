@@ -12,7 +12,7 @@ import junit.framework.TestCase;
  */
 public class CoderTest extends TestCase {
 
-    Coder coder = Coder.getInstance();
+    private final Coder coder = Coder.getInstance();
 
     public void testJump() {
         System.out.println("Testing jump:");
