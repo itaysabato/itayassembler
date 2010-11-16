@@ -5,7 +5,6 @@ import assembler.Parser;
 import junit.framework.TestCase;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
@@ -16,7 +15,7 @@ import java.io.IOException;
  * Time: 17:16:52 <br/>
  */
 public class ParserTest extends TestCase {
-    private static final String PATH = "C:\\Users\\itay\\IdeaProjects\\assembler\\src\\test\\";
+    private static final String PATH = "C:\\Rotmus\\intellij\\assembler\\src\\test\\";
 
     public void testRect() throws IOException {
         parse("rect\\RectL.asm");
