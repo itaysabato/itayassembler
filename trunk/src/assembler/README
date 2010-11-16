@@ -20,7 +20,8 @@ Parser.java - Parses the input file into commands, omitting spaces, comments and
 
 Comments
 ---------------
-none.
+Since we used packages in our project, the java files reside in a separate folder from the rest.
+This should hold no effect over running make and Assembler.
 
 
 

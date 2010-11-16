@@ -6,10 +6,7 @@ package assembler;
  * IDs: 036910008, 300618592 <br/>
  * Date: 13/11/2010 <br/>
  * Time: 23:34:54 <br/>
- */
-
-/**
- *  Enum class for the commands.
+ *  Represents the different types of commands.
  */
 public enum CommandType {
     A,C,L
