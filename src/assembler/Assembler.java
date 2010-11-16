@@ -11,11 +11,8 @@ import java.util.Map;
  * IDs: 036910008, 300618592 <br/>
  * Date: 13/11/2010 <br/>
  * Time: 23:08:29 <br/>
- */
-
-/**
  * An assembler program which get the file path of an asm file
- *  in his args, traslate it to binary code and output a hack file.
+ *  in his arguments, translate it to binary code and output a hack file.
  */
 public class Assembler {
     private static final int ADDRESS_LEN = 16;
@@ -29,7 +26,8 @@ public class Assembler {
             Parser parser = new Parser(in);
             Map<String, String> symbols = initSymbols();
 
-            int PC= 0;    // first pass
+            int PC= 0;
+            // first pass
             while(parser.advance()) {
                 if(parser.commandType() == CommandType.L) {
                     symbols.put(parser.symbol(), toAddress(PC));
@@ -40,7 +38,8 @@ public class Assembler {
             Coder coder = Coder.getInstance();
             parser =  new Parser(in);
 
-            int VC = ADDRESS_START; // second pass
+            int VC = ADDRESS_START;
+            // second pass
             while(parser.advance()) {
                 String bits;
 
@@ -73,7 +72,7 @@ public class Assembler {
     }
 
     /**
-     * pads the given address with zeros
+     *  translates the given address into binary String and pads it with zeros
      */
     private static String toAddress(int address) {
         String bits = Integer.toBinaryString(address);
@@ -83,7 +82,7 @@ public class Assembler {
     }
 
     /**
-     * insert to the map the predefined symbols
+     * initializes and insert to the map the predefined symbols
      */
     private static Map<String, String> initSymbols() {
         Map<String, String> symbols = new HashMap<String, String>();

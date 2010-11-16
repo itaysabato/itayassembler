@@ -11,13 +11,13 @@
 JAVAC=javac
 JAVACFLAGS=
 
-SRCS=*.java
+SRCS=assembler/*.java
 EXEC=Assembler
 
 TAR=tar
 TARFLAGS=cvf
 TARNAME=project6.tar
-TARSRCS=$(SRCS) $(EXEC) README Makefile
+TARSRCS= *
 
 all: compile
 
