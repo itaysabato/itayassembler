@@ -12,6 +12,11 @@ import java.util.Map;
  * Date: 13/11/2010 <br/>
  * Time: 23:08:29 <br/>
  */
+
+/**
+ * An assembler program which get the file path of an asm file
+ *  in his args, traslate it to binary code and output a hack file.
+ */
 public class Assembler {
     private static final int ADDRESS_LEN = 16;
     private static final int ADDRESS_START= 16;
@@ -67,6 +72,9 @@ public class Assembler {
         }
     }
 
+    /**
+     * pads the given address with zeros
+     */
     private static String toAddress(int address) {
         String bits = Integer.toBinaryString(address);
         char[] paddingZeros =  new char[ADDRESS_LEN - bits.length()];
@@ -74,6 +82,9 @@ public class Assembler {
          return new String(paddingZeros)  + bits;
     }
 
+    /**
+     * insert to the map the predefined symbols
+     */
     private static Map<String, String> initSymbols() {
         Map<String, String> symbols = new HashMap<String, String>();
         symbols.put("SP", toAddress(0));
