@@ -10,8 +10,8 @@ import java.util.Map;
  * Time: 23:14:51 <br/>
  */
 public class Coder {
-    private static Coder instance = new Coder();
-    private  Map<String, String> mnemonicsToBinary;
+    private static final Coder instance = new Coder();
+    private  final Map<String, String> mnemonicsToBinary;
 
     private Coder() {
         mnemonicsToBinary = new HashMap<String, String>();
