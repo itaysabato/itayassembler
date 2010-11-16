@@ -1,0 +1,25 @@
+rotmus, itays04
+===============================================================================
+Rotem Barzilay, ID 300618592, rotmus@cs.huji.ac.il
+Itay Sabato, ID 036910008, itays04@cs.huji.ac.il
+===============================================================================
+
+                           Project 3
+                           ---------
+  
+
+Submitted Files
+---------------
+README - This file.
+Bit.hdl - 1-bit memory register.
+Register.hdl - 16-bit register.
+PC.hdl - 16-bit counter with load and reset controls.
+RAM8.hdl - memory of 8 registers, each 16-bit wide.
+RAM64.hdl - memory of 64 registers, each 16-bit wide.
+RAM512.hdl - memory of 512 registers, each 16-bit wide.
+RAM4K.hdl - memory of 4K registers, each 16-bit wide.
+RAM16K.hdl - memory of 16K registers, each 16-bit wide.
+
+
+
+
