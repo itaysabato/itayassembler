@@ -10,91 +10,76 @@ import java.util.Map;
  * Time: 23:14:51 <br/>
  */
 public class Coder {
+    private static Coder instance = new Coder();
+    private  Map<String, String> mnemonicsToBinary;
 
-     private static Map<String,String> jumpMap = buildMap();
-
-    public static Map<String,String> buildMap() {
-        HashMap<String,String> jumpMap = new  HashMap<String,String>();
-        jumpMap.put("","000");
-        jumpMap.put("JGT","001");
-        jumpMap.put("JEQ","010");
-        jumpMap.put("JGE","011");
-        jumpMap.put("JLT","100");
-        jumpMap.put("JNE","101");
-        jumpMap.put("JLE","110");
-        jumpMap.put("JMP","111");
-        return jumpMap;
+    private Coder() {
+        mnemonicsToBinary = new HashMap<String, String>();
+        initJumps();
+        initComps();
     }
 
-    public static String dest(String dest) {
-        char[] result = new char[3];
-        if(dest.contains("A")) result[0] = '1';
-        else   result[0] = '0';
-        if(dest.contains("D")) result[1] = '1';
-        else   result[1] = '0';
-        if(dest.contains("M")) result[2] = '1';
-        else   result[2] = '0';
-        return new String(result);
+    public static Coder getInstance() {
+        return instance;
     }
 
-     public static String comp(String comp) {
-        char[] result = new char[7];
-         boolean M =  comp.contains("M"),  A =  comp.contains("A"),
-                 D =  comp.contains("D"),  callSign =  comp.contains("!"),
-                 and =   comp.contains("&"), number = true,
-                 or =  comp.contains("|"), minus =  comp.contains("-"),
-                 plus = comp.contains("+"), one =  comp.contains("1");
-         try {
-             Integer.parseInt(comp);
+    private void initJumps() {
+        mnemonicsToBinary.put("","000");
+        mnemonicsToBinary.put("JGT","001");
+        mnemonicsToBinary.put("JEQ","010");
+        mnemonicsToBinary.put("JGE","011");
+        mnemonicsToBinary.put("JLT","100");
+        mnemonicsToBinary.put("JNE","101");
+        mnemonicsToBinary.put("JLE","110");
+        mnemonicsToBinary.put("JMP","111");
+    }
+
+    private void initComps() {
+        mnemonicsToBinary.put("0","101010");
+        mnemonicsToBinary.put("1","111111");
+        mnemonicsToBinary.put("-1","111010");
+        mnemonicsToBinary.put("D","001100");
+        mnemonicsToBinary.put("A","110000");
+        mnemonicsToBinary.put("!D","001101");
+        mnemonicsToBinary.put("!A","110001");
+        mnemonicsToBinary.put("-D","001111");
+        mnemonicsToBinary.put("-A","110011");
+        mnemonicsToBinary.put("D+1","011111");
+        mnemonicsToBinary.put("A+1","110111");
+        mnemonicsToBinary.put("D-1","001110");
+        mnemonicsToBinary.put("A-1","110010");
+        mnemonicsToBinary.put("D+A","000010");
+        mnemonicsToBinary.put("D-A","010011");
+        mnemonicsToBinary.put("A-D","000111");
+        mnemonicsToBinary.put("D&A","000000");
+        mnemonicsToBinary.put("D|A","010101");
+    }
+
+    public String dest(String dest) {
+        String  bits = "";
+
+        if(dest.contains("A")) bits += '1';
+        else   bits += '0';
+
+        if(dest.contains("D")) bits += '1';
+        else   bits += '0';
+
+        if(dest.contains("M")) bits += '1';
+        else   bits += '0';
+
+        return bits;
+    }
+
+     public  String comp(String comp) {
+         if(comp.contains("M")) {
+                  return  "1"+mnemonicsToBinary.get(comp.replaceAll("M","A"));
          }
-         catch(NumberFormatException e) {
-             number = false;
+         else {
+             return "0"+ mnemonicsToBinary.get(comp);
          }
-
-        if(M) result[0] = '1';
-         else result[0] = '0';
-
-         if(((M || A) && !D) || number )
-             result[1] = '1';
-         else
-             result[1] = '0';
-
-         if((A || M || one) && !and && !comp.contains("D-1") &&
-                 !comp.contains("D+A") && !comp.contains("A-D") &&
-                  !comp.contains("D+M") && !comp.contains("M-D"))
-             result[2] = '1';
-         else
-             result[2] = '0';
-
-         if((!(M || A) && D) || number )
-             result[3] = '1';
-         else
-             result[3] = '0';
-
-         if(((one || or || (D && !(A || M)) || ((A || M) && plus && one) ||
-                 ((A || M) && minus && D)) && !comp.contains("-1")
-                 && !comp.contains("A-1") && !comp.contains("D-A")
-                  && !comp.contains("M-1") && !comp.contains("M-A"))
-                  || comp.contains("D-1")|| comp.contains("D-1"))
-             result[4] = '1';
-         else
-             result[4] = '0';
-
-         if(callSign || (comp.length()==1 && !number) || or || and )
-             result[5] = '0';
-         else
-             result[5] = '1';
-
-         if(callSign || or || (one && !minus) ||  ((A || M) && D && minus) ||
-                 (minus && !one &&(A || D || M)))
-             result[6] = '1';
-         else
-             result[6] = '0';
-
-        return new String(result);
     }
 
-     public static String jump(String jump) {
-        return jumpMap.get(jump);
+     public String jump(String jump) {
+        return mnemonicsToBinary.get(jump);
     }
 }

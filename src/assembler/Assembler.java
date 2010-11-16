@@ -1,7 +1,6 @@
 package assembler;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Arrays;
 
 /**
@@ -16,33 +15,41 @@ public class Assembler {
 
     public static void main(String[] args) {
         try {
-            File file = new File(args[0]);
-            Parser parser = new Parser(file);
+            File in = new File(args[0]);
+            File out = new File(args[0].replaceAll("\\.asm", ".hack"));
+//            if(out.exists()) {
+//                out.delete();
+//            }
+//            out.createNewFile();
+
+            PrintStream printer =  new PrintStream(out);
+            Parser parser = new Parser(in);
+            Coder coder = Coder.getInstance();
 
             while(parser.advance()) {
                 String bits = "";
 
                 if(parser.commandType() == CommandType.C) {
                     String[] cdj = parser.CParameters();
-                    bits = "111"+Coder.comp(cdj[0])+Coder.dest(cdj[1])+Coder.jump(cdj[2]);
+                    bits = "111"+coder.comp(cdj[0])+coder.dest(cdj[1])+coder.jump(cdj[2]);
                 }
+
                 else if(parser.commandType() == CommandType.A) {
                     bits = Integer.toBinaryString(Integer.parseInt(parser.symbol()));
                     char[] paddingZeros =   new char[ADDRESS_LEN - bits.length()];
                     Arrays.fill(paddingZeros, '0');
                     bits = new String(paddingZeros)  + bits;
                 }
+
                 else {
                     
                 }
-                System.out.println(bits);
+                printer.println(bits);
             }
         }
-        catch (FileNotFoundException e) {
+        catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-
-
     }
 
 }
