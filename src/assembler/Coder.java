@@ -69,7 +69,7 @@ public class Coder {
 
         return bits;
     }
-
+    
      public  String comp(String comp) {
          if(comp.contains("M")) {
                   return  "1"+mnemonicsToBinary.get(comp.replaceAll("M","A"));
