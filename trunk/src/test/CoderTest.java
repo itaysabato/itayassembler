@@ -6,7 +6,7 @@ import junit.framework.TestCase;
 /**
  * Names: Itay Sabato, Rotem Barzilay <br/>
  * Logins: itays04, rotmus <br/>
- * IDs: 036910008, RID <br/>
+ * IDs: 036910008, 300618592 <br/>
  * Date: 16/11/2010 <br/>
  * Time: 03:54:23 <br/>
  */
