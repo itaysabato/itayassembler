@@ -20,15 +20,13 @@ public class Parser {
     }
 
     public boolean advance() {
-        boolean hasNext = false;
         while(source.hasNextLine()) {
             line = source.nextLine().replaceAll("( )|(//(.*))", ""); // get rid of spaces and comments
             if(!line.isEmpty()){
-                hasNext = true;
-                break;
+                return true;
             }
         }
-        return hasNext;
+        return false;
     }
 
     public CommandType commandType()  {
