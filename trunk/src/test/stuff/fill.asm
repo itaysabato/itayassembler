@@ -34,20 +34,20 @@ M=0
 @ad
 D=M
 @max
-D=M-D
+D=M -D
 @CONT
 D;JEQ
 
 @ad
 D=M
 @SCREEN
-A=A+D
+A=D +A
 M=-1
 
 @step
 D=M
 @ad
-M=M+D
+M=D+M
 
 @FILL
 0;JMP
@@ -59,43 +59,43 @@ M=M+D
 
 @b
 M=1
-@CHECK
-0;JMP // jumps to the start.
-(CLEAR)
-@b
-D=M
+@C  HECK
+0;JM P // jump s  to the start.
+(CL EAR)
+@ b
+D= M
 @CHECK
 D;JEQ
 
 @ad
 M=0
 
-(CLEAR1)
-@ad
+(C LEA R1)
+@a d
 D=M
-@max
-D=M-D
+@ max
+D=M - D
 @CONT1
 D;JEQ
 
-@ad
+@a d
 D=M
 @SCREEN
-A=A+D
-M=0
+A=D+A
+M =0
 
 @step
 D=M
 @ad
-M=M+D
+M=D+M
 
 @CLEAR1
-0;JMP
+0;JM P
 (CONT1)
 
 
 
 @b
 M=0
-@CHECK
-0;JMP // jumps to the start.
+@ CHECK
+0;J MP // jumps to the start.
